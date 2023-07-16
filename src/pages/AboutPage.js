@@ -4,6 +4,7 @@ import PartnersList from '../features/partners/PartnersList';
 
 const AboutPage = () => {
     return (
+    
         <Container>
             <SubHeader current='About Us' />
             <Row className='row-content'>
