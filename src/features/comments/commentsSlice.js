@@ -16,6 +16,7 @@ const commentsSlice = createSlice({
                 id: state.commentsArray.length + 1,
                 ...action.payload
             };
+            console.log('here:'+newComment);
             state.commentsArray.push(newComment);
         }
     }
