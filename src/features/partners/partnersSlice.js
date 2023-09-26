@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { readDataTransferFromClipboard } from '@testing-library/user-event/dist/types/utils';
 // import { PARTNERS } from '../../app/shared/PARTNERS';
 import { baseUrl } from '../../app/shared/baseUrl';
 import { mapImageURL } from '../../utils/mapImageURL';
