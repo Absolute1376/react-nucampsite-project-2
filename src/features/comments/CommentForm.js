@@ -8,18 +8,20 @@ import { addComment } from './commentsSlice';
 const CommentForm = ({ campsiteId }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
+    const RATINGS = [1, 2, 3, 4, 5];
     const dispatch = useDispatch();
 
-    const handleSubmit = (values) => {
+    const handleSubmit = (values, { resetForm }) => {
         const comment = {
             campsiteId: parseInt(campsiteId),
-            rating: values.rating,
+            rating: parseInt(values.rating),
             author: values.author,
             text: values.commentText,
             date: new Date(Date.now()).toISOString()
         };
         console.log(comment);
         dispatch(addComment(comment));
+        resetForm();
         setModalOpen(false);
     }
     return (
@@ -34,14 +36,15 @@ const CommentForm = ({ campsiteId }) => {
                 <ModalBody>
                     <Formik
                         initialValues={{
-                            rating: undefined,
+                            rating: '',
                             author: '',
                             commentText: ''
                         }}
                         onSubmit={handleSubmit}
                         validate={validateCommentForm}
                     >
-                        <Form>
+                        {({ handleSubmit }) => (
+                            <Form onSubmit={handleSubmit}>
                             <FormGroup>
                                 <Label htmlFor='rating'>Rating</Label>
                                 <Field
@@ -50,11 +53,9 @@ const CommentForm = ({ campsiteId }) => {
                                     className='form-control'
                                 >
                                     <option>Select...</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    {RATINGS.map(rating => (
+                                        <option key={rating} value={rating}>{rating}</option>
+                                    ))}
                                 </Field>
                                 <ErrorMessage name='rating'>
                                     {(msg) => <p className="text-danger">{msg}</p>}
@@ -84,7 +85,7 @@ const CommentForm = ({ campsiteId }) => {
                                 Submit
                             </Button>
                         </Form>
-
+                        )}
                     </Formik>
                 </ModalBody>
             </Modal>

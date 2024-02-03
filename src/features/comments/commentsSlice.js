@@ -19,7 +19,7 @@ const commentsSlice = createSlice({
             console.log('here:'+newComment);
             state.commentsArray.push(newComment);
         }
-    }
+    } 
 });
 
 export const commentsReducer = commentsSlice.reducer;
